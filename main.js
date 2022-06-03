@@ -10,18 +10,34 @@ class Main {
 
     constructor(){
         // Init UI
-        this.#setDateTime(Main.SELECTOR_LNATT, this.#getISOLocalDate(new Date()));
+        if (localStorage.getItem("lastNATTime")){
+            this.#setDateTime(Main.SELECTOR_LNATT, localStorage.getItem("lastNATTime"));
+        }
+        else {
+            this.#setDateTime(Main.SELECTOR_LNATT, this.#getISOLocalDate(new Date()));
+        }
+        // this.#getPredictedResultDelay(Main.SELECTOR_PRD) = localStorage.getItem("predictedResultDelay");
+        // this.#getRegularGoOutTime(Main.SELECTOR_RGOT) = localStorage.getItem("regularGoOutTime");
         this.#initCalcBtn(Main.SELECTOR_CALC);
     }
 
     #initCalcBtn(selector){
         document.querySelector(selector).addEventListener("click", (event) => {
+            // Save Data
+            this.#saveData();
+
             // Init Scheduler
-            this.#scheduler = new Scheduler(
+            /*this.#scheduler = new Scheduler(
                 this.#getPavilionOpenTime(Main.SELECTORS_POT),
                 this.#getLastNATTime(Main.SELECTOR_LNATT),
                 this.#getPredictedResultDelay(Main.SELECTOR_PRD),
                 this.#getRegularGoOutTime(Main.SELECTOR_RGOT)
+            );*/
+            this.#scheduler = new Scheduler(
+                localStorage.getItem("pavilionOpenTime").split(","),
+                localStorage.getItem("lastNATTime"),
+                localStorage.getItem("predictedResultDelay"),
+                localStorage.getItem("regularGoOutTime")
             );
 
             if (this.#scheduler){
@@ -64,6 +80,13 @@ class Main {
 
     #setDateTime(selector, value){
         document.querySelector(selector).value = value;
+    }
+
+    #saveData(){
+        localStorage.setItem("pavilionOpenTime", this.#getPavilionOpenTime(Main.SELECTORS_POT));
+        localStorage.setItem("lastNATTime", this.#getLastNATTime(Main.SELECTOR_LNATT));
+        localStorage.setItem("predictedResultDelay", this.#getPredictedResultDelay(Main.SELECTOR_PRD));
+        localStorage.setItem("regularGoOutTime", this.#getRegularGoOutTime(Main.SELECTOR_RGOT));
     }
 }
 
