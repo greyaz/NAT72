@@ -1,31 +1,30 @@
 body{
     background: #0e0e0e;
     color: #fff;
-    margin: 1em;
-    color: #38523a;
+    margin: 1rem;
+    color: #406043;
 }
 fieldset{
     background: #111111;
     border: none;
-    padding: 1em;
-    margin-bottom: 1em;
+    padding: 1rem;
+    margin-bottom: 1rem;
 }
 input {
     background: #38523a;
-
 }
 h1{
     text-align: center;
-    line-height: 2em;
+    line-height: 2rem;
 }
 input, button{
-    height: 2em;
+    height: 2rem;
 }
 input{
     color: #fff;
 }
 #pavilionOpenTime .am{
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
 }
 #pavilionOpenTime input{
     width: 25%;
