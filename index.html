@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>新能源人续命指南</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='scheduler.js'></script>
+    <script src='main.js' defer></script>
+</head>
+<body>
+    <fieldset id="pavilionOpenTime">
+        <legend>检测亭开放时间</legend>
+        <div class="am">
+            上午 <input type="time" value="08:00"/> ～ <input type="time" value="12:00"/>
+        </div>
+        <div class="pm">
+            下午 <input type="time" value="13:00"/> ～ <input type="time" value="17:00"/> 
+        </div>
+    </fieldset>
+    <fieldset id="lastNATTime">
+        <legend>上次核酸采样时间</legend>
+        <input type="datetime-local"/>
+    </fieldset>
+    <fieldset id="predictedResultDelay">
+        <legend>预估检测结果延迟</legend>
+        <input type="number" value="12"> 小时
+    </fieldset>
+    <fieldset id="regularGoOutTime">
+        <legend>日常出行时间</legend>
+        <input type="time" value="08:00"/>
+    </fieldset>
+    <fieldset id="nextNATTime">
+        <legend>下次核酸时间</legend>
+        <input type="datetime-local" readonly/>
+        <button>计算</button>
+    </fieldset>
+    
+</body>
+</html>
