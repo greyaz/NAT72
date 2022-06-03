@@ -2,7 +2,6 @@ class Main {
     static SELECTORS_POT    = ["#pavilionOpenTime .am input", "#pavilionOpenTime .pm input"];
     static SELECTOR_LNATT   = "#lastNATTime input";
     static SELECTOR_PRD     = "#predictedResultDelay input";
-    static SELECTOR_RGOT    = "#regularGoOutTime input";
     static SELECTOR_NNATT   = "#nextNATTime input";
     static SELECTOR_CALC    = "#nextNATTime button";
 
@@ -10,14 +9,19 @@ class Main {
 
     constructor(){
         // Init UI
+        if (localStorage.getItem("pavilionOpenTime")){
+            this.#pavilionOpenTime = localStorage.getItem("pavilionOpenTime").split(",");
+        }
         if (localStorage.getItem("lastNATTime")){
-            this.#setDateTime(Main.SELECTOR_LNATT, localStorage.getItem("lastNATTime"));
+            this.#lastNATTime = localStorage.getItem("lastNATTime");
         }
         else {
-            this.#setDateTime(Main.SELECTOR_LNATT, this.#getISOLocalDate(new Date()));
+            this.#lastNATTime = this.#getISOLocalDate(new Date());
         }
-        // this.#getPredictedResultDelay(Main.SELECTOR_PRD) = localStorage.getItem("predictedResultDelay");
-        // this.#getRegularGoOutTime(Main.SELECTOR_RGOT) = localStorage.getItem("regularGoOutTime");
+        if (localStorage.getItem("predictedResultDelay")){
+            this.#predictedResultDelay = localStorage.getItem("predictedResultDelay");
+        }
+        
         this.#initCalcBtn(Main.SELECTOR_CALC);
     }
 
@@ -27,47 +31,53 @@ class Main {
             this.#saveData();
 
             // Init Scheduler
-            /*this.#scheduler = new Scheduler(
-                this.#getPavilionOpenTime(Main.SELECTORS_POT),
-                this.#getLastNATTime(Main.SELECTOR_LNATT),
-                this.#getPredictedResultDelay(Main.SELECTOR_PRD),
-                this.#getRegularGoOutTime(Main.SELECTOR_RGOT)
-            );*/
             this.#scheduler = new Scheduler(
                 localStorage.getItem("pavilionOpenTime").split(","),
                 localStorage.getItem("lastNATTime"),
                 localStorage.getItem("predictedResultDelay"),
-                localStorage.getItem("regularGoOutTime")
             );
 
             if (this.#scheduler){
-                let date = new Date(this.#scheduler.calcNextNATTime());
-                this.#setDateTime(Main.SELECTOR_NNATT, this.#getISOLocalDate(date));
+                let date = new Date(this.#scheduler.getNextNATTime());
+                document.querySelector(Main.SELECTOR_NNATT).value = this.#getISOLocalDate(date);
             }
         });
     }
 
-    #getPavilionOpenTime(selectors){
+    get #pavilionOpenTime(){
         let openTime = [];
-        selectors.forEach(element => {
+        Main.SELECTORS_POT.forEach(element => {
             document.querySelectorAll(element).forEach(element => {
                 openTime.push(element.value);
             });
         });
-
         return openTime;
     }
 
-    #getLastNATTime(selector){
-        return document.querySelector(selector).value;
+    set #pavilionOpenTime(timeArray){
+        let index = 0;
+        Main.SELECTORS_POT.forEach(element => {
+            document.querySelectorAll(element).forEach(element => {
+                element.value = timeArray[index];
+                index++;
+            });
+        });
     }
 
-    #getPredictedResultDelay(selector){
-        return document.querySelector(selector).value;
+    get #lastNATTime(){
+        return document.querySelector(Main.SELECTOR_LNATT).value;
     }
 
-    #getRegularGoOutTime(selector){
-        return document.querySelector(selector).value;
+    set #lastNATTime(value){
+        document.querySelector(Main.SELECTOR_LNATT).value = value;
+    }
+
+    get #predictedResultDelay(){
+        return document.querySelector(Main.SELECTOR_PRD).value;
+    }
+
+    set #predictedResultDelay(value){
+        document.querySelector(Main.SELECTOR_PRD).value = value;
     }
 
     #getISOLocalDate(date){
@@ -78,15 +88,10 @@ class Main {
                 `${date.getMinutes()}`.padStart(2, "0");
     }
 
-    #setDateTime(selector, value){
-        document.querySelector(selector).value = value;
-    }
-
     #saveData(){
-        localStorage.setItem("pavilionOpenTime", this.#getPavilionOpenTime(Main.SELECTORS_POT));
-        localStorage.setItem("lastNATTime", this.#getLastNATTime(Main.SELECTOR_LNATT));
-        localStorage.setItem("predictedResultDelay", this.#getPredictedResultDelay(Main.SELECTOR_PRD));
-        localStorage.setItem("regularGoOutTime", this.#getRegularGoOutTime(Main.SELECTOR_RGOT));
+        localStorage.setItem("pavilionOpenTime", this.#pavilionOpenTime);
+        localStorage.setItem("lastNATTime", this.#lastNATTime);
+        localStorage.setItem("predictedResultDelay", this.#predictedResultDelay);
     }
 }
 

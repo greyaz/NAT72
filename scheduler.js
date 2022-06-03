@@ -1,39 +1,46 @@
 class Scheduler {
     static VALIDITY_HOURS = 72;
-    // static WAITING_MINUTES = 30;
 
     #pavilionOpenTime;
     #lastNATTime;
     #predictedResultDelay;
-    #regularGoOutTime;
+    #now;
 
-    constructor(pavilionOpenTime, lastNATTime, predictedResultDelay, regularGoOutTime){
+    constructor(pavilionOpenTime, lastNATTime, predictedResultDelay){
         this.#pavilionOpenTime      = pavilionOpenTime;
         this.#lastNATTime           = lastNATTime;
         this.#predictedResultDelay  = predictedResultDelay;
-        this.#regularGoOutTime      = regularGoOutTime;
     }
 
-    calcNextNATTime(){
+    getNextNATTime(){
         let nextTime;
-        let timeWindows = [];
+        let lastTime = new Date(this.#lastNATTime);
 
-        let targetTime = new Date(this.#lastNATTime);
-        let goOutTime = new Date(targetTime);
-
-        goOutTime.setHours(Number(this.#regularGoOutTime.split(":")[0]));
-        goOutTime.setMinutes(Number(this.#regularGoOutTime.split(":")[1]));
-
-        let gapTime = goOutTime - targetTime;
-
-        targetTime.setHours(
-            targetTime.getHours() + Scheduler.VALIDITY_HOURS - this.#predictedResultDelay
+        this.#now = new Date();
+        let minLastTime = new Date(this.#now);
+        minLastTime.setHours(
+            minLastTime.getHours() - Scheduler.VALIDITY_HOURS + Number(this.#predictedResultDelay)
         );
 
-        if (gapTime < 0){
-            targetTime.setTime(targetTime.getTime() + gapTime);
+        if (lastTime < minLastTime){
+            nextTime = this.#calcNextNATTime(minLastTime);
         }
+        else {
+            nextTime = this.#calcNextNATTime(lastTime);
+        }
+        
+        return nextTime;
+    }
 
+    #calcNextNATTime(lastTime){
+        let nextTime;
+        let targetTime = lastTime;
+        let timeWindows = [];
+        // set target time
+        targetTime.setHours(
+            targetTime.getHours() + Scheduler.VALIDITY_HOURS - Number(this.#predictedResultDelay)
+        );
+        // init time windows
         this.#pavilionOpenTime.forEach(element => {
             let time = new Date(  
                 targetTime.getFullYear(),                 
@@ -44,7 +51,7 @@ class Scheduler {
             );
             timeWindows.push(time);
         });
-
+        // calculate next time
         if (targetTime >= timeWindows[3]){
             nextTime = timeWindows[3];
         }
@@ -54,17 +61,29 @@ class Scheduler {
         else if(targetTime < timeWindows[0]){
             let _time = new Date(timeWindows[3]);
             _time.setDate(_time.getDate() - 1);
-
             nextTime = _time;
         }
         else {
             nextTime = targetTime;
         }
-
+        // adjust time if expired
+        if (nextTime <= this.#now){
+            if (this.#now >= timeWindows[3]){
+                let _time = new Date(timeWindows[0]);
+                _time.setDate(_time.getDate() + 1);
+                nextTime = _time;
+            }
+            else if (this.#now >= timeWindows[1] && this.#now < timeWindows[2]){
+                nextTime = timeWindows[2];
+            }
+            else if (this.#now < timeWindows[0]){
+                nextTime = timeWindows[0];
+            }
+            else {
+                nextTime = this.#now;
+            }
+        }
+        // return result
         return nextTime;
-        //return nextTime.setMinutes(nextTime.getMinutes() - Scheduler.WAITING_MINUTES);
     }
-
-    
-
 }
