@@ -21,6 +21,12 @@ h1{
 input, button{
     height: 2em;
 }
+input{
+    color: #fff;
+}
+#pavilionOpenTime .am{
+    margin-bottom: 1em;
+}
 #pavilionOpenTime input{
     width: 25%;
 }
