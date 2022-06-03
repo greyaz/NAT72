@@ -1,0 +1,25 @@
+body{
+    font-size: 14px;
+    background: #0e0e0e;
+    color: #fff;
+    margin: 1rem;
+    color: #38523a;
+    line-height: 18px;
+}
+fieldset{
+    background: #111111;
+    border: none;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+input {
+    background: #38523a;
+    line-height: 18px;
+}
+button{
+    line-height: 18px;
+}
+h1{
+    text-align: center;
+    line-height: 2em;
+}
