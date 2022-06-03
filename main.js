@@ -38,7 +38,7 @@ class Main {
             );
 
             if (this.#scheduler){
-                let date = new Date(this.#scheduler.getNextNATTime());
+                let date = new Date(this.#scheduler.calcNextNATTime());
                 document.querySelector(Main.SELECTOR_NNATT).value = this.#getISOLocalDate(date);
             }
         });
