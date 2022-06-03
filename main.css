@@ -18,3 +18,9 @@ h1{
     text-align: center;
     line-height: 2em;
 }
+input, button{
+    height: 2em;
+}
+#pavilionOpenTime input{
+    width: 25%;
+}
