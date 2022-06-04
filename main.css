@@ -1,32 +1,54 @@
 body{
-    background: #0e0e0e;
-    color: #fff;
+    background: #e6e7ec;
     margin: 1rem;
-    color: #406043;
+    color: #585867;
 }
 fieldset{
-    background: #111111;
+    background: linear-gradient(340deg, #ededf2, #e9e9ed);
     border: none;
     padding: 1rem;
     margin-bottom: 1rem;
 }
+fieldset legend{
+    font-size: .8rem;
+}
 input {
-    background: #38523a;
-    border: 0;
+    background: #d2d2da;
+    color: #585867;
+}
+button{
+    background: #676772;
+    color: #FFF;
+    padding: 0 2rem;
 }
 h1{
     text-align: center;
-    line-height: 2rem;
+    line-height: 3rem;
 }
 input, button{
     height: 2rem;
-}
-input{
-    color: #fff;
+    border: 0;
 }
 #pavilionOpenTime .am{
     margin-bottom: 1rem;
 }
 #pavilionOpenTime input{
     width: 35%;
+}
+#nextNATTime{
+    padding: 2rem 1rem 1.5rem;
+}
+#nextNATTime input{
+    text-align: center;
+    width: 100%;
+    background: transparent;
+    font-weight: bold;
+    margin-bottom: .25rem;
+    font-size: 1.2rem;
+}
+#nextNATTime label{
+    width: 100%;
+    text-align: center;
+    display: block;
+    letter-spacing: .18rem;
 }

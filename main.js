@@ -3,7 +3,8 @@ class Main {
     static SELECTOR_LNATT   = "#lastNATTime input";
     static SELECTOR_PRD     = "#predictedResultDelay input";
     static SELECTOR_NNATT   = "#nextNATTime input";
-    static SELECTOR_CALC    = "#nextNATTime button";
+    static SELECTOR_NNATD   = "#nextNATTime label";
+    static SELECTOR_CALC    = "#lastNATTime button";
 
     #scheduler;
 
@@ -21,27 +22,28 @@ class Main {
         if (localStorage.getItem("predictedResultDelay")){
             this.#predictedResultDelay = localStorage.getItem("predictedResultDelay");
         }
-        
-        this.#initCalcBtn(Main.SELECTOR_CALC);
+        // add listener
+        document.querySelector(Main.SELECTOR_CALC).addEventListener("click", event => {
+            this.#calculate();
+        });
     }
 
-    #initCalcBtn(selector){
-        document.querySelector(selector).addEventListener("click", (event) => {
-            // Save Data
-            this.#saveData();
+    #calculate(){
+        // Save Data
+        this.#saveData();
 
-            // Init Scheduler
-            this.#scheduler = new Scheduler(
-                localStorage.getItem("pavilionOpenTime").split(","),
-                localStorage.getItem("lastNATTime"),
-                localStorage.getItem("predictedResultDelay"),
-            );
+        // Init Scheduler
+        this.#scheduler = new Scheduler(
+            localStorage.getItem("pavilionOpenTime").split(","),
+            localStorage.getItem("lastNATTime"),
+            localStorage.getItem("predictedResultDelay"),
+        );
 
-            if (this.#scheduler){
-                let date = new Date(this.#scheduler.calcNextNATTime());
-                document.querySelector(Main.SELECTOR_NNATT).value = this.#getISOLocalDate(date);
-            }
-        });
+        if (this.#scheduler){
+            let date = new Date(this.#scheduler.calcNextNATTime());
+            document.querySelector(Main.SELECTOR_NNATT).value = this.#getISOLocalDate(date);
+            document.querySelector(Main.SELECTOR_NNATD).innerHTML = this.#getLocalDay(date);
+        }
     }
 
     get #pavilionOpenTime(){
@@ -86,6 +88,11 @@ class Main {
                 `${date.getDate()}`.padStart(2, "0")+`T`+
                 `${date.getHours()}`.padStart(2, "0")+`:`+
                 `${date.getMinutes()}`.padStart(2, "0");
+    }
+
+    #getLocalDay(date){
+        let dayList = ["星期天","星期一","星期二","星期三","星期四","星期五","星期六"];
+        return dayList[date.getDay()];
     }
 
     #saveData(){
