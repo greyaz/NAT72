@@ -31,18 +31,24 @@ class Main {
     #calculate(){
         // Save Data
         this.#saveData();
-
         // Init Scheduler
         this.#scheduler = new Scheduler(
             localStorage.getItem("pavilionOpenTime").split(","),
             localStorage.getItem("lastNATTime"),
             localStorage.getItem("predictedResultDelay"),
         );
-
         if (this.#scheduler){
+            // Show date
             let date = new Date(this.#scheduler.calcNextNATTime());
             document.querySelector(Main.SELECTOR_NNATT).value = this.#getISOLocalDate(date);
             document.querySelector(Main.SELECTOR_NNATD).innerHTML = this.#getLocalDay(date);
+            // Download ics
+            let calEntry = icsFormatter();
+            var title = '核酸检测';
+            var begin = date;
+            var end = new Date(date.getTime() + 30*60000);
+            calEntry.addEvent(title, "", "", begin.toUTCString(), end.toUTCString());
+            calEntry.download('NAT72');
         }
     }
 
