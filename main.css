@@ -45,6 +45,7 @@ input, button{
     font-weight: bold;
     margin-bottom: .25rem;
     font-size: 1.2rem;
+    display: block;
 }
 #nextNATTime label{
     width: 100%;
