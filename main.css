@@ -15,20 +15,19 @@ fieldset legend{
 input {
     background: #d2d2da;
     color: #585867;
+    height: 2rem;
+    border: 0;
 }
 button{
     background: #676772;
     color: #FFF;
     padding: 1px 2rem;
     border: 1px solid #676772;
+    height: 2rem;
 }
 h1{
     text-align: center;
     line-height: 3rem;
-}
-input, button{
-    height: 2rem;
-    border: 0;
 }
 #pavilionOpenTime .am{
     margin-bottom: 1rem;
@@ -59,7 +58,7 @@ input, button{
     line-height: 2rem;
     height: 2rem;
     display: inline-block;
-    padding: 0 1rem;
+    padding: 0 .5rem;
     color: #585867;
     text-decoration: none;
 }
