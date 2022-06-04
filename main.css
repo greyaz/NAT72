@@ -19,8 +19,7 @@ input {
 button{
     background: #676772;
     color: #FFF;
-    padding: 0 2rem;
-    border: 1px solid #676772;
+    padding: 1px 2rem;
 }
 h1{
     text-align: center;
