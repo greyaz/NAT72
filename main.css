@@ -58,7 +58,7 @@ h1{
     line-height: 2rem;
     height: 2rem;
     display: inline-block;
-    padding: 0 .5rem;
+    padding: 0 .75rem;
     color: #585867;
     text-decoration: none;
 }
@@ -76,8 +76,8 @@ h1{
     right: 2rem;
     top: 1.5rem;
     background: linear-gradient(340deg, #ededf2, #e9e9ed);
-    padding: 0.5rem 1rem;
-    box-shadow: 0 0.5rem 0.5rem 0 rgb(0 0 0 / 20%);
+    padding: .5rem 1rem;
+    box-shadow: 0 .5rem .5rem 0 rgb(0 0 0 / 20%);
 }
 meter{
     width: 100%;
