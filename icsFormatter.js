@@ -8,7 +8,7 @@ var icsFormatter = function() {
         return;
     }
 
-    var SEPARATOR = (navigator.appVersion.indexOf('Win') !== -1) ? '\r\n' : '\n';
+    var SEPARATOR = '\n';
     var calendarEvents = [];
     var calendarStart = [
         'BEGIN:VCALENDAR',
@@ -110,7 +110,7 @@ var icsFormatter = function() {
             ext = (typeof ext !== 'undefined') ? ext : '.ics';
             filename = (typeof filename !== 'undefined') ? filename : 'calendar';
             var calendar = calendarStart + SEPARATOR + calendarEvents.join(SEPARATOR) + calendarEnd;
-            window.open( "data:text/calendar;charset=utf8," + escape(calendar));
+            window.open( "data:text/calendar;charset=utf8," + encodeURIComponent(calendar));
         }
     };
 };
