@@ -22,10 +22,12 @@ class Main {
         if (localStorage.getItem("predictedResultDelay")){
             this.#predictedResultDelay = localStorage.getItem("predictedResultDelay");
         }
-        // add listener
+        // Add listener
         document.querySelector(Main.SELECTOR_CALC).addEventListener("click", event => {
             this.#calculate();
         });
+        // Run once
+        this.#calculate();
     }
 
     #calculate(){
