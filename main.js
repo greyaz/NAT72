@@ -6,7 +6,9 @@ class Main {
     static SELECTOR_NNATD   = "#nextNATTime label";
     static SELECTOR_CALC    = "#lastNATTime button";
     static SELECTOR_WXG     = "#wxGuide";
-    static SELECTORS_SSB     = "#shaismy a";
+    static SELECTORS_SSB    = "#shaismy a";
+    static SELECTORS_EDBM   = "#expiryDateBar meter";
+    static SELECTORS_EDBT   = "#expiryDateBar span";
 
     #scheduler;
 
@@ -34,6 +36,7 @@ class Main {
         });
         // Run once
         this.#calculate();
+
     }
 
     #calculate(){
@@ -50,6 +53,10 @@ class Main {
             let date = new Date(this.#scheduler.calcNextNATTime());
             document.querySelector(Main.SELECTOR_NNATT).value = this.#getISOLocalDate(date);
             document.querySelector(Main.SELECTOR_NNATD).innerHTML = this.#getLocalDay(date);
+            //Update expiry bar
+            let leftTime = this.#scheduler.getLeftTime();
+            document.querySelector(Main.SELECTORS_EDBT).innerHTML = leftTime;
+            document.querySelector(Main.SELECTORS_EDBM).value = leftTime;
         }
     }
 

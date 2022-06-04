@@ -67,4 +67,11 @@ class Scheduler {
         // return result
         return nextTime;
     }
+
+    getLeftTime(){
+        let lastTime = new Date(this.#lastNATTime);
+        let now = new Date();
+        let time = (now - lastTime) / 1000 / 60 / 60;
+        return Math.round((Scheduler.VALIDITY_HOURS - time) * 10) / 10;
+    }
 }

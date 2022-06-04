@@ -79,3 +79,14 @@ input, button{
     padding: 0.5rem 1rem;
     box-shadow: 0 0.5rem 0.5rem 0 rgb(0 0 0 / 20%);
 }
+meter{
+    width: 100%;
+}
+meter::-webkit-meter-bar{
+    background: #d2d2da;
+    border: 0;
+    border-radius: 0;
+}
+meter::-webkit-meter-optimum-value{
+    background: #7abc5e;
+}
