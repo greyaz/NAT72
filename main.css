@@ -83,10 +83,14 @@ meter{
     width: 100%;
     display: block;
 }
+meter::-webkit-meter-inner-element{
+    width: 100%;
+}
 meter::-webkit-meter-bar{
     background: #d2d2da;
     border: 0;
     border-radius: 0;
+    width: 100%;
 }
 meter::-webkit-meter-optimum-value{
     background: #7abc5e;
