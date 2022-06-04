@@ -81,6 +81,7 @@ input, button{
 }
 meter{
     width: 100%;
+    display: block;
 }
 meter::-webkit-meter-bar{
     background: #d2d2da;
