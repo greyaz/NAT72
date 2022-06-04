@@ -21,15 +21,16 @@ class Scheduler {
             targetTime.getHours() + Scheduler.VALIDITY_HOURS - Number(this.#predictedResultDelay)
         );
         // init time windows
+        let windowTime = targetTime > now ? targetTime : now;
         this.#pavilionOpenTime.forEach(element => {
-            let time = new Date(  
-                now.getFullYear(),                 
-                now.getMonth(),                       
-                now.getDate(),                     
+            windowTime = new Date(  
+                windowTime.getFullYear(),                 
+                windowTime.getMonth(),                       
+                windowTime.getDate(),                     
                 Number(element.split(":")[0]),                      
                 Number(element.split(":")[1])
             );
-            timeWindows.push(time);
+            timeWindows.push(windowTime);
         });
         // calculate next time
         if (targetTime >= timeWindows[3]){
