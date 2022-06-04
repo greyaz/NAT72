@@ -6,7 +6,6 @@
     <title>新能源人续命指南</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='icsFormatter.js'></script>
     <script src='scheduler.js'></script>
     <script src='main.js' defer></script>
 </head>
@@ -35,7 +34,10 @@
         <input type="number" value="12"> 小时
     </fieldset>
     <fieldset>
-        <a href="shaismy://platformapi/startapp">打开随申办</a>
+        <legend>随申办快捷入口</legend>
+        <a href="shaismy://platformapi/startapp?code=HSJC">核酸查询</a>
+        <a href="shaismy://platformapi/startapp?code=HSJCD">核酸采样点</a>
+        <a href="shaismy://platformapi/startapp?code=HSM">核酸码</a>
     </fieldset>
 </body>
 </html>

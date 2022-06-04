@@ -52,3 +52,13 @@ input, button{
     display: block;
     letter-spacing: .18rem;
 }
+a {
+    background: #d2d2da;
+    font-size: .8rem;
+    line-height: 2rem;
+    height: 2rem;
+    display: inline-block;
+    padding: 0 1rem;
+    color: #585867;
+    text-decoration: none;
+}
