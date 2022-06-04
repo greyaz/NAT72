@@ -2,15 +2,22 @@ class Main {
     static SELECTORS_POT    = ["#pavilionOpenTime .am input", "#pavilionOpenTime .pm input"];
     static SELECTOR_LNATT   = "#lastNATTime input";
     static SELECTOR_PRD     = "#predictedResultDelay input";
-    static SELECTOR_NNATT   = "#nextNATTime input";
-    static SELECTOR_NNATD   = "#nextNATTime label";
+    static SELECTOR_NNATT   = "#nextDate";
+    static SELECTOR_NNATD   = "#nextDay";
     static SELECTOR_CALC    = "#lastNATTime button";
     static SELECTOR_WXG     = "#wxGuide";
     static SELECTORS_SSB    = "#shaismy a";
     static SELECTORS_EDBM   = "#expiryDateBar meter";
     static SELECTORS_EDBT   = "#expiryDateBar span";
+    static SELECTORS_ATC    = "#addToCal";
 
     #scheduler;
+    #calConfig = {
+        name:"核酸检测",
+        options:["Apple", "iCal|其它"],
+        timeZone:"Asia/Shanghai",
+        iCalFileName: "核酸提醒"
+    };
 
     constructor(){
         // Init UI
@@ -26,20 +33,24 @@ class Main {
         if (localStorage.getItem("predictedResultDelay")){
             this.#predictedResultDelay = localStorage.getItem("predictedResultDelay");
         }
+        // Init Cal Btn
+        let calBtn = document.querySelector(Main.SELECTORS_ATC);
+        calBtn.addEventListener('click', () => atcb_action(this.#calConfig, calBtn))
+        
         // Weixin Guide
         if (/micromessenger/.test(navigator.userAgent.toLocaleLowerCase())){
             this.#addWXGuide();
         }
         // Add listener
         document.querySelector(Main.SELECTOR_CALC).addEventListener("click", event => {
-            this.#calculate();
+            this.#update();
         });
-        // Run once
-        this.#calculate();
+        // Update once
+        this.#update();
 
     }
 
-    #calculate(){
+    #update(){
         // Save Data
         this.#saveData();
         // Init Scheduler
@@ -51,12 +62,16 @@ class Main {
         // Show date
         if (this.#scheduler){
             let date = new Date(this.#scheduler.calcNextNATTime());
-            document.querySelector(Main.SELECTOR_NNATT).value = this.#getISOLocalDate(date);
+            let dateISOString= this.#getISOLocalDate(date);
+            document.querySelector(Main.SELECTOR_NNATT).innerHTML = dateISOString.replace("T", " ");
             document.querySelector(Main.SELECTOR_NNATD).innerHTML = this.#getLocalDay(date);
-            //Update expiry bar
+            // Update expiry bar
             let leftTime = this.#scheduler.getLeftTime();
             document.querySelector(Main.SELECTORS_EDBT).innerHTML = leftTime;
             document.querySelector(Main.SELECTORS_EDBM).value = leftTime;
+            // config calendar reminder content
+            this.#calConfig.startDate = dateISOString;
+            this.#calConfig.endDate = dateISOString;
         }
     }
 

@@ -6,19 +6,22 @@
     <title>上海核酸时间计算器</title>
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type='text/css' media='screen' href="./assets/atcb.min.css">
     <link rel='stylesheet' type='text/css' media='screen' href='./assets/main.css'>
+    <script src="./assets/atcb.min.js" defer></script>
     <script src='./assets/scheduler.js'></script>
     <script src='./assets/main.js' defer></script>
 </head>
 <body>
     <fieldset id="nextNATTime">
         <legend>下次核酸时间</legend>
-        <input type="datetime-local" readonly/>
-        <label>-</label>
+        <div id="nextDate"></div>
+        <div id="nextDay"></div>
+        <button id="addToCal">+ 日历提醒</button>
     </fieldset>
     <fieldset id="expiryDateBar">
         <legend>剩余有效期 <span>72</span>小时</legend>
-        <meter value="60" min="0" max="72" low="12" high="24" optimum="54"></meter>
+        <meter value="72" min="0" max="72" low="12" high="24" optimum="54"></meter>
     </fieldset>
     <fieldset id="lastNATTime">
         <legend>上次采样时间</legend>

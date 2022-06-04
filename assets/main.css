@@ -38,19 +38,21 @@ h1{
 #nextNATTime{
     padding: 2rem 1rem 1.5rem;
 }
-#nextNATTime input{
+#nextDate{
     text-align: center;
     width: 100%;
     background: transparent;
     font-weight: bold;
     font-size: 1.2rem;
     display: block;
+    font-family: monospace;
 }
-#nextNATTime label{
+#nextDay{
     width: 100%;
     text-align: center;
     display: block;
     letter-spacing: .18rem;
+    margin-bottom: .5rem;
 }
 #shaismy a {
     background: #d2d2da;
@@ -97,4 +99,11 @@ meter::-webkit-meter-bar{
 }
 meter::-webkit-meter-optimum-value{
     background: #7abc5e;
+}
+#addToCal{
+    display: block;
+    margin: auto;
+    background: #d2d2da;
+    border: 0;
+    color: #585867;
 }
