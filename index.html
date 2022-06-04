@@ -16,12 +16,12 @@
         <label>-</label>
     </fieldset>
     <fieldset id="lastNATTime">
-        <legend>上次核酸采样时间</legend>
+        <legend>上次采样时间</legend>
         <input type="datetime-local"/>
         <button>计算</button>
     </fieldset>
     <fieldset id="pavilionOpenTime">
-        <legend>检测亭开放时间</legend>
+        <legend>可做核酸时间</legend>
         <div class="am">
             <input type="time" value="08:00"/> ～ <input type="time" value="12:00"/>
         </div>
@@ -30,14 +30,17 @@
         </div>
     </fieldset>
     <fieldset id="predictedResultDelay">
-        <legend>预估检测结果延迟</legend>
+        <legend>预估结果延迟</legend>
         <input type="number" value="12"> 小时
     </fieldset>
-    <fieldset>
+    <fieldset id="shaismy">
         <legend>随申办查询（请现在系统浏览器中打开本页面）</legend>
         <a href="shaismy://platformapi/startapp?code=HSJC">核酸查询</a>
         <a href="shaismy://platformapi/startapp?code=HSJCD">核酸采样点</a>
         <a href="shaismy://platformapi/startapp?code=HSM">核酸码</a>
     </fieldset>
+    <div id="wxGuide">
+        <label>请使用浏览器打开 ↗</label>
+    </div>
 </body>
 </html>

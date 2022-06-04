@@ -52,7 +52,7 @@ input, button{
     display: block;
     letter-spacing: .18rem;
 }
-a {
+#shaismy a {
     background: #d2d2da;
     font-size: .9rem;
     line-height: 2rem;
@@ -61,4 +61,21 @@ a {
     padding: 0 1rem;
     color: #585867;
     text-decoration: none;
+}
+#wxGuide{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .75);
+    display: none;
+}
+#wxGuide label{
+    position: absolute;
+    right: 2rem;
+    top: 1.5rem;
+    background: linear-gradient(340deg, #ededf2, #e9e9ed);
+    padding: 0.5rem 1rem;
+    box-shadow: 0 0.5rem 0.5rem 0 rgb(0 0 0 / 20%);
 }
