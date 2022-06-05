@@ -93,6 +93,3 @@ meter::-webkit-meter-optimum-value{
 #ssbQRcode{
     display: none;
 }
-#ssbQRcode img{
-    width: 5rem;
-}
