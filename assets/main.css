@@ -64,23 +64,6 @@ h1{
     color: #585867;
     text-decoration: none;
 }
-#wxGuide{
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, .75);
-    display: none;
-}
-#wxGuide label{
-    position: absolute;
-    right: 2rem;
-    top: 1.5rem;
-    background: linear-gradient(340deg, #ededf2, #e9e9ed);
-    padding: .5rem 1rem;
-    box-shadow: 0 .5rem .5rem 0 rgb(0 0 0 / 20%);
-}
 meter{
     width: 100%;
     height: .25rem;
@@ -106,4 +89,10 @@ meter::-webkit-meter-optimum-value{
     background: #d2d2da;
     border: 0;
     color: #585867;
+}
+#ssbQRcode{
+    display: none;
+}
+#ssbQRcode img{
+    width: 5rem;
 }

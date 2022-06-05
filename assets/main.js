@@ -5,11 +5,11 @@ class Main {
     static SELECTOR_NNATT   = "#nextDate";
     static SELECTOR_NNATD   = "#nextDay";
     static SELECTOR_CALC    = "#lastNATTime button";
-    static SELECTOR_WXG     = "#wxGuide";
-    static SELECTORS_SSB    = "#shaismy a";
+    static SELECTOR_SSB    = "#shaismy";
     static SELECTORS_EDBM   = "#expiryDateBar meter";
     static SELECTORS_EDBT   = "#expiryDateBar span";
     static SELECTORS_ATC    = "#addToCal";
+    static SELECTOR_SSB2    = "#ssbQRcode";
 
     #scheduler;
     #calConfig = {
@@ -37,9 +37,9 @@ class Main {
         let calBtn = document.querySelector(Main.SELECTORS_ATC);
         calBtn.addEventListener('click', () => atcb_action(this.#calConfig, calBtn))
         
-        // Weixin Guide
+        // Weixin handler
         if (/micromessenger/.test(navigator.userAgent.toLocaleLowerCase())){
-            this.#addWXGuide();
+            this.#showWXContent();
         }
         // Add listener
         document.querySelector(Main.SELECTOR_CALC).addEventListener("click", event => {
@@ -135,19 +135,9 @@ class Main {
         localStorage.setItem("lastNATTime", this.#lastNATTime);
         localStorage.setItem("predictedResultDelay", this.#predictedResultDelay);
     }
-
-    #addWXGuide(){
-        //Portals click
-        document.querySelectorAll(Main.SELECTORS_SSB).forEach(element => {
-            element.addEventListener("click", event => {
-                event.preventDefault();
-                document.querySelector(Main.SELECTOR_WXG).style.display = "block";
-            });
-        });
-        //Hide guide
-        document.querySelector(Main.SELECTOR_WXG).addEventListener("click", event => {
-            event.currentTarget.style.display = "none";
-        });
+    #showWXContent(){
+        document.querySelector(Main.SELECTOR_SSB2).style.display = "block";
+        document.querySelector(Main.SELECTOR_SSB).style.display = "none";
     }
 }
 
