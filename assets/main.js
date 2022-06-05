@@ -14,7 +14,7 @@ class Main {
     #scheduler;
     #calConfig = {
         name:"核酸检测",
-        options:["Apple", "iCal|其它"],
+        options:["Apple", 'Google', 'Microsoft365', 'Outlook.com', 'MicrosoftTeams', 'Yahoo', "iCal|通用"],
         timeZone:"Asia/Shanghai",
         iCalFileName: "核酸提醒"
     };
@@ -61,16 +61,22 @@ class Main {
         );
         // Show date
         if (this.#scheduler){
-            let date = new Date(this.#scheduler.calcNextNATTime());
+            let date = this.#scheduler.getNextNATTime();
             let dateISOString= this.#getISOLocalDate(date);
             document.querySelector(Main.SELECTOR_NNATT).innerHTML = dateISOString.replace("T", " ");
             document.querySelector(Main.SELECTOR_NNATD).innerHTML = this.#getLocalDay(date);
             // Update expiry bar
-            let leftTime = this.#scheduler.getLeftTime();
+            let leftTime = this.#scheduler.getLeftHours();
             document.querySelector(Main.SELECTORS_EDBT).innerHTML = leftTime;
             document.querySelector(Main.SELECTORS_EDBM).value = leftTime;
             // config calendar reminder content
-            this.#calConfig.startDate = dateISOString;
+            let reminderTime = this.#scheduler.getReminderTime();
+            if (reminderTime){
+                this.#calConfig.startDate = this.#getISOLocalDate(reminderTime);
+            }
+            else {
+                this.#calConfig.startDate = dateISOString;
+            }
             this.#calConfig.endDate = dateISOString;
         }
     }
