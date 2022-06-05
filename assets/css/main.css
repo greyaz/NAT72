@@ -8,8 +8,6 @@ fieldset{
     border: none;
     padding: 1rem;
     margin-bottom: 1rem;
-}
-fieldset legend{
     font-size: .8rem;
 }
 input {
@@ -92,4 +90,7 @@ meter::-webkit-meter-optimum-value{
 }
 #ssbQRcode{
     display: none;
+}
+fieldset.highlight{
+    background: linear-gradient(340deg, #f7f7f7, #e6e7ec);
 }

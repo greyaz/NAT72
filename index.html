@@ -16,17 +16,17 @@
 </head>
 <body>
     <img src="./assets/imgs/logo.png" alt="logo" width="0" height="0"/>
-    <fieldset id="nextNATTime">
+    <fieldset id="nextNATTime" class="highlight">
         <legend>下次核酸时间</legend>
         <div id="nextDate"></div>
         <div id="nextDay"></div>
         <button id="addToCal">+ 日历提醒</button>
     </fieldset>
-    <fieldset id="expiryDateBar">
+    <fieldset id="expiryDateBar" class="highlight">
         <legend>剩余有效期 <span>72</span>小时</legend>
         <meter value="72" min="0" max="72" low="12" high="24" optimum="54"></meter>
     </fieldset>
-    <fieldset id="lastNATTime">
+    <fieldset id="lastNATTime" class="highlight">
         <legend>上次采样时间</legend>
         <input type="datetime-local"/>
         <button>计算</button>
