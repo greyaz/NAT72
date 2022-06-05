@@ -92,5 +92,5 @@ meter::-webkit-meter-optimum-value{
     display: none;
 }
 fieldset.highlight{
-    background: linear-gradient(340deg, #f7f7f7, #e6e7ec);
+    background: linear-gradient(340deg,#f2f2f5,#efefef,#e8e9ef);
 }
